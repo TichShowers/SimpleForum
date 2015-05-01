@@ -1,0 +1,17 @@
+﻿@model SimpleForum.ViewModels.TopicIndex
+
+<h2>@Model.Name</h2>
+
+@foreach (var post in Model.Posts)
+{
+    <div>
+        <div class="col-lg-3">
+            <p>@{ Html.RenderPartial("_ProfileLink", post.Author); }</p>
+        </div>
+        <div class="col-lg-9">
+            <p>@post.PostedOn.ToShortDateString()</p>
+            <hr/>
+            <p>@Html.Markdown(post.Content)</p>
+        </div>
+    </div>
+}

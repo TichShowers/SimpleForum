@@ -1,0 +1,44 @@
+﻿
+@model SimpleForum.ViewModels.ForumIndex
+           
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+@if (Model.SubForums.Any())
+{
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info">Subforums</li>
+        @foreach (var forum in Model.SubForums)
+        {
+            <li class="list-group-item row">
+                <div class="col-md-6"><a href="@Url.RouteUrl("Forum", new{forum.Id, forum.Slug})">@forum.Name</a></div>
+                <div class="col-md-3">Topics: @forum.TotalTopics</div>
+                <div class="col-md-3">Replies: @forum.TotalReplies</div>
+            </li>
+        }
+    </ul>
+}
+
+@if (Model.Topics.Any())
+{
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info">Topics</li>
+        @foreach (var topic in Model.Topics)
+        {
+            <li class="list-group-item row">
+                <div class="col-md-6"><a href="@Url.RouteUrl("Topic", new{topic.Id, topic.Slug})">@topic.Name</a> by <em>@{ Html.RenderPartial("_ProfileLink", topic.Author); }</em></div>
+                <div class="col-md-3">Replies: @topic.ReplyCount</div>
+                <div class="col-md-3">Last Reply On: @topic.LastReplyTime.ToShortDateString()</div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <ul class="list-group">
+        <li class="list-group-item">No topics found</li>
+    </ul>
+}

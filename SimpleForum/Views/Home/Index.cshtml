@@ -1,0 +1,23 @@
+﻿@model SimpleForum.ViewModels.HomeIndex
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<h1>My awesome forum</h1>
+
+@foreach (var category in Model.Categories)
+{
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info">
+            @category.Name
+        </li>
+        @foreach (var forum in category.Forums)
+        {
+            <li class="list-group-item row">
+                <div class="col-md-6"><a href="@Url.RouteUrl("Forum", new{ id = forum.Id, slug = forum.Slug})">@forum.Name</a></div>
+                <div class="col-md-3">Topics: @forum.TotalTopics</div>
+                <div class="col-md-3">Replies: @forum.TotalReplies</div>
+            </li>
+        }
+    </ul>
+}

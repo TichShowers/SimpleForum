@@ -1,0 +1,41 @@
+﻿@model SimpleForum.ViewModels.UserView
+
+@{
+    ViewBag.Title = Model.Username;
+}
+
+<h2>@Model.Username</h2>
+
+<div>
+    <p><i class="glyphicon glyphicon-envelope"></i> @Model.Email</p>
+    <p><i class="glyphicon glyphicon-user"></i> @Model.Groups</p>
+</div>
+
+<div class="col-lg-6">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info">Topics made</li>
+        @if (Model.TopicsMade.Any())
+        {
+            foreach (var topic in Model.TopicsMade)
+            {
+                <li class="list-group-item">
+                    <a href="@Url.RouteUrl("Topic", new{topic.Id, topic.Slug})">@topic.Name</a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+<div class="col-lg-6">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info">Topics posted in</li>
+        @if (Model.TopicsPostedIn.Any())
+        {
+            foreach (var topic in Model.TopicsPostedIn)
+            {
+                <li class="list-group-item">
+                    <a href="@Url.RouteUrl("Topic", new{topic.Id, topic.Slug})">@topic.Name</a>
+                </li>
+            }
+        }
+    </ul>
+</div>

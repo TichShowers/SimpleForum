@@ -1,0 +1,2 @@
+﻿@model SimpleForum.ViewModels.SharedProfileLink        
+<a href="@Url.RouteUrl("User", new{id = Model.Id, slug = Model.Slug})">@Model.Username</a>
